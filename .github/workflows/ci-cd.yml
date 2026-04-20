@@ -54,7 +54,7 @@ jobs:
           terraform init
           terraform apply -auto-approve -var="public_key=${{ secrets.SSH_PUBLIC_KEY }}"
           sleep 10 # Esperamos un poco para que la instancia esté lista
-          
+
           # 1. Extraemos la IP a una variable local de Bash primero
           IP_EXTRAIDA=$(terraform output -raw instance_ip)
           
@@ -69,6 +69,6 @@ jobs:
           host: ${{ env.EC2_IP }}
           username: ec2-user # Usuario por defecto en Amazon Linux
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/*"
+          source: "./dist/*"
           target: "/var/www/html"
           strip_components: 1 # Para que no cree una carpeta 'dist' dentro de html
