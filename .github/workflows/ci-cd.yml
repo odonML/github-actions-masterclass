@@ -90,6 +90,6 @@ jobs:
           username: ec2-user # Usuario por defecto en Amazon Linux
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./dist/*"
-          target: "/var/www/html"
+          target: "/var/www/html/"
           strip_components: 1 # Para que no cree una carpeta 'dist' dentro de html
-          rm: true # Elimina los archivos en el destino antes de copiar los nuevos
+          rm: false # Elimina los archivos en el destino antes de copiar los nuevos
