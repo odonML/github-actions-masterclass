@@ -1,4 +1,4 @@
-# 1. Crear el Key Pair para acceso SSH
+# 1. Crear el Key Pair para acceso SSH 
 resource "aws_key_pair" "deployer" {
   key_name   = "${var.project_name}-key"
   public_key = var.public_key
