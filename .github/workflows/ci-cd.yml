@@ -32,13 +32,33 @@ jobs:
 
       - name: Build de Astro
         run: npm run build
+
+      - name: Subir artefacto app
+        uses: actions/upload-artifact@v4
+        with:
+          name: proyecto-astro # Nombre del paquete
+          path: dist/ # Ruta al directorio de salida de Astro
+      
+      - name: Subir artefacto terrafomr
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-config # Nombre del paquete
+          path: terraform/ # Ruta al directorio de salida de Terraform
   
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:  
-      - name: Checkout código
-        uses: actions/checkout@v4
+      - name: Descargar artefacto app
+        uses: actions/download-artifact@v4
+        with:
+          name: proyecto-astro
+          path: dist/
+      - name: Descargar artefacto terraform
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-config
+          path: terraform/
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
