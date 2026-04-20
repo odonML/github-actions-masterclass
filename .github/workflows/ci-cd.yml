@@ -83,6 +83,9 @@ jobs:
           
           # 3. La guardamos en el archivo de entorno de GitHub
           echo "EC2_IP=$IP_LIMPIA" >> $GITHUB_ENV
+      - name: Esperar a que la instancia esté lista
+        run: sleep 30
+
       - name: Deploy a la instancia EC2
         uses: appleboy/scp-action@v0.1.7
         with:
